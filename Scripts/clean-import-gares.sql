@@ -57,4 +57,10 @@ set
 geo_point_lat = split_part(geo_point, ',', 1)::numeric, 
 geo_point_lon = split_part(geo_point, ',', 2)::numeric;
 
+alter table etalab_gares
+add geo_point_position point;
+
+update etalab_gares
+set geo_point_position = point(geo_point_lon,geo_point_lat);
+
 select * from etalab_gares;

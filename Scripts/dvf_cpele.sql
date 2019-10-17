@@ -106,3 +106,13 @@ group by
 select * from dvf_cpele_prix_m2_ville
 where count > 10
 order by prix_m2 desc;
+
+-- Colonne position
+
+alter table dvf_cpele
+add column position_geo point;
+
+update dvf_cpele 
+set position_geo = point(longitude,latitude);
+
+select * from dvf_cpele as dc;
