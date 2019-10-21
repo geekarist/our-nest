@@ -116,3 +116,26 @@ update dvf_cpele
 set position_geo = point(longitude,latitude);
 
 select * from dvf_cpele as dc;
+
+-- Prix/m2 par code insee
+
+drop table dvf_cpele_prix_m2_par_insee;
+
+create table dvf_cpele_prix_m2_par_insee as
+select
+	code_departement,
+	code_postal,
+	code_commune,
+	nom_commune,
+	count(*),
+	median(prix_m2) as prix_m2,
+	median(longitude) as longitude,
+	median(latitude) as latitude
+from
+	dvf_cpele_prix_m2
+group by
+	code_departement,
+	code_postal,
+	code_commune,
+	nom_commune;
+
